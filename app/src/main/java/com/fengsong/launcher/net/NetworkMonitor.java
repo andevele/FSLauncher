@@ -4,13 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.util.Log;
 
 import com.fengsong.launcher.base.BaseActivity;
+import com.fengsong.launcher.util.Constant;
+import com.fengsong.launcher.util.USBUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -58,9 +62,17 @@ public class NetworkMonitor extends BroadcastReceiver {
         netWorkFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         netWorkFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
 
+        IntentFilter usbFilter = new IntentFilter();
+        usbFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+        usbFilter.addAction(Intent.ACTION_MEDIA_REMOVED);
+        usbFilter.addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED);
+        usbFilter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        usbFilter.addDataScheme("file");
+
         Context context = mContextRef.get();
         if (context != null && flag == false) {
             context.registerReceiver(this, netWorkFilter);
+            context.registerReceiver(this, usbFilter);
             flag = true;
         }
     }
@@ -108,15 +120,22 @@ public class NetworkMonitor extends BroadcastReceiver {
                     mWifiLevel = WifiManager.calculateSignalLevel(mWifiRssi, WIFI_LEVEL_COUNT);
                 }
                 break;
+            case Intent.ACTION_MEDIA_MOUNTED:
+            case Intent.ACTION_MEDIA_REMOVED:
+            case UsbManager.ACTION_USB_DEVICE_ATTACHED:
+            case UsbManager.ACTION_USB_DEVICE_DETACHED:
+                if (mListener != null) {
+                    mListener.onUpdateUSBConnectivity(netWorkAction);
+                }
+                return;
+
                 default:
                     break;
         }
+        
         updateActiveNetwork();
         if (mListener != null) {
-            Log.d("zhujj","==500==");
             mListener.onUpdateNetworkConnectivity(getCurrentConnectivityInfo());
-        } else {
-            Log.d("zhujj","====501==");
         }
     }
 
@@ -131,6 +150,23 @@ public class NetworkMonitor extends BroadcastReceiver {
         Log.d("zhujj", "NetworkMonitor.interface:" + mActiveInterface + "NetworkMonitor.Status:" + mActiveStatus + "NetworkMonitor.wifi.level:" + mWifiLevel);
 
         return mCurrentConnectivity;
+    }
+
+    /**
+     * 检测USB状态
+     */
+    public void checkUsb() {
+        String path = null;
+        Context context = mContextRef.get();
+        if(context == null) {
+            return;
+        }
+        StorageManager sm = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        if(USBUtil.isUSBMounted(sm)) {
+            if (mListener != null) {
+                mListener.onUpdateUSBConnectivity(Constant.ACTION_USB_MOUNTED);
+            }
+        }
     }
 
     private void updateActiveNetwork() {

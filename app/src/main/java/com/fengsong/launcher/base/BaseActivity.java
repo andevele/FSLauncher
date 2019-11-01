@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
             mNetworkMonitor = new NetworkMonitor(this, mNetworkUpdateListener);
         }
         mNetworkMonitor.startMonitor();
+        mNetworkMonitor.checkUsb();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.fengsong.launcher.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -11,11 +13,13 @@ import android.widget.RelativeLayout;
 
 import com.fengsong.launcher.R;
 import com.fengsong.launcher.net.NetworkMonitor;
+import com.fengsong.launcher.util.Constant;
 import com.fengsong.launcher.util.ConstantResource;
 
 public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpdateListener {
     private Context mContext;
     private ImageView mNetworkIcon;
+    private ImageView mUsbicon;
 
     public TopBar(Context context) {
         super(context);
@@ -36,6 +40,8 @@ public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpd
         this.setFocusable(false);
         mNetworkIcon = (ImageView) findViewById(R.id.network_label);
         mNetworkIcon.setFocusable(false);
+        mUsbicon = (ImageView) findViewById(R.id.usb_icon);
+        mUsbicon.setFocusable(false);
         checkNetWork();
     }
 
@@ -99,17 +105,33 @@ public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpd
 
     @Override
     public void onUpdateUSBConnectivity(String action) {
-
+        updateView(action);
     }
 
     private void setNetworkStatusImg() {
         ConnectivityManager con = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean wifi = con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
         boolean internet = con.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET).isConnectedOrConnecting();
-        if(internet) {
+        if (internet) {
             mNetworkIcon.setImageResource(R.drawable.ic_eth_connected);
         } else {
             mNetworkIcon.setImageResource(R.drawable.ic_eth_disconnected);
+        }
+    }
+
+    public void updateView(String action) {
+        switch (action) {
+            case Constant.ACTION_USB_MOUNTED:
+            case Intent.ACTION_MEDIA_MOUNTED:
+            case UsbManager.ACTION_USB_DEVICE_ATTACHED:
+                mUsbicon.setImageResource(R.drawable.ic_usb_inserted);
+                break;
+            case Intent.ACTION_MEDIA_REMOVED:
+            case UsbManager.ACTION_USB_DEVICE_DETACHED:
+                mUsbicon.setImageResource(R.drawable.ic_usb_removed);
+                break;
+            default:
+                break;
         }
     }
 }
