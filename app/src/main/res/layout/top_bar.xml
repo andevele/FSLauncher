@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="@color/top_bar_bg"
-    android:clipChildren="false"
-    tools:context=".FsMainActivity">
+    android:clipChildren="false">
+
+    <ImageView
+        android:id="@+id/home_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="63dp"
+        android:src="@drawable/ic_home" />
+
+    <TextView
+        android:id="@+id/home_label"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/home_icon"
+        android:gravity="center"
+        android:text="Home"
+        android:textColor="@color/top_bar_time"
+        android:textSize="24sp" />
 
     <TextClock
         android:id="@+id/time_label"
@@ -16,6 +33,7 @@
         android:layout_marginEnd="63dp"
         android:format12Hour="MM/dd/yyyy \nhh:mm     aa"
         android:format24Hour="MM/dd/yyyy \nhh:mm     aa"
+        android:textColor="@color/top_bar_time"
         android:textSize="24sp" />
 
     <ImageView

@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="top_bar_bg">#1b4054</color>
+    <color name="top_bar_time">#ffffff</color>
 </resources>
