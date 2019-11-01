@@ -21,7 +21,7 @@
         android:layout_toEndOf="@+id/home_icon"
         android:gravity="center"
         android:text="Home"
-        android:textColor="@color/top_bar_time"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
     <TextClock
@@ -33,7 +33,7 @@
         android:layout_marginEnd="63dp"
         android:format12Hour="MM/dd/yyyy \nhh:mm     aa"
         android:format24Hour="MM/dd/yyyy \nhh:mm     aa"
-        android:textColor="@color/top_bar_time"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
     <ImageView

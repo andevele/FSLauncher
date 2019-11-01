@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:focusable="false">
+
+    <RelativeLayout
+        android:id="@+id/source_list_view"
+        android:layout_width="150dp"
+        android:layout_height="365dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:clipChildren="true"
+        android:clipToPadding="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/input_source_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/common_apps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/source_list_view"
+        android:layout_gravity="center"
+        android:layout_toEndOf="@+id/source_list_view"
+        android:clipToPadding="false"
+        android:focusable="false">
+
+        <RelativeLayout
+            android:id="@+id/view_youtube"
+            android:layout_width="260dp"
+            android:layout_height="365dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_youtube" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_netflix"
+            android:layout_width="260dp"
+            android:layout_height="365dp"
+            android:layout_alignTop="@+id/view_youtube"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/view_youtube"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_netflix" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_hotstar"
+            android:layout_width="210dp"
+            android:layout_height="175dp"
+            android:layout_alignTop="@+id/view_netflix"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/view_netflix"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_hotstar" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_file_explorer"
+            android:layout_width="210dp"
+            android:layout_height="175dp"
+            android:layout_alignTop="@+id/view_hotstar"
+            android:layout_toEndOf="@+id/view_hotstar"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_file_explorer" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_tvstore"
+            android:layout_width="210dp"
+            android:layout_height="175dp"
+            android:layout_below="@+id/view_hotstar"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/view_netflix"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_tvstore" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_apps"
+            android:layout_width="210dp"
+            android:layout_height="175dp"
+            android:layout_alignTop="@+id/view_tvstore"
+            android:layout_toEndOf="@+id/view_tvstore"
+            android:background="@drawable/common_apps_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:padding="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_apps" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
