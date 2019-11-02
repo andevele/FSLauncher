@@ -6,7 +6,6 @@ import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,8 +14,10 @@ import com.fengsong.launcher.R;
 import com.fengsong.launcher.net.NetworkMonitor;
 import com.fengsong.launcher.util.Constant;
 import com.fengsong.launcher.util.ConstantResource;
+import com.fengsong.launcher.util.LogUtils;
 
 public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpdateListener {
+    private static final String TAG = TopBar.class.getSimpleName();
     private Context mContext;
     private ImageView mNetworkIcon;
     private ImageView mUsbicon;
@@ -50,7 +51,7 @@ public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpd
         boolean isWifiOn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isAvailable();
         boolean wifiConnect = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
         boolean ethernetConnect = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET).isConnectedOrConnecting();
-        Log.d("zhujj", "==isWifiOn: " + isWifiOn +
+        LogUtils.v(TAG, "==isWifiOn: " + isWifiOn +
                 " wifiConnect: " + wifiConnect);
         if (!wifiConnect && !ethernetConnect) {
             if (isWifiOn) {
@@ -69,7 +70,7 @@ public class TopBar extends RelativeLayout implements NetworkMonitor.INetworkUpd
     public void onUpdateNetworkConnectivity(Bundle newConnectivity) {
         int mCurrentInterfaceId = newConnectivity.getInt(NetworkMonitor.KEY_NET_INTERFACE_ID, NetworkMonitor.ID_INTERFACE_ETHERNET);
         final int statusId = newConnectivity.getInt(NetworkMonitor.KEY_NET_STATUS_ID, NetworkMonitor.ID_STATUS_DISCONNECTED);
-        Log.d("zhujj", "=====mCurrentInterfaceId:" + mCurrentInterfaceId + " statusId:" + statusId);
+        LogUtils.v(TAG, "mCurrentInterfaceId:" + mCurrentInterfaceId + " statusId:" + statusId);
         switch (mCurrentInterfaceId) {
             case NetworkMonitor.ID_INTERFACE_ETHERNET:
                 switch (statusId) {

@@ -5,8 +5,11 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import com.fengsong.launcher.base.ViewListener.ItemFocusChangeListener;
+import com.fengsong.launcher.base.ViewListener.OnItemClickListener;
 
 import com.fengsong.launcher.adapter.AllAppsAdapter;
 import com.fengsong.launcher.base.BaseActivity;
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * zhulf 20190924
+ * zhulf 20191031
  * andevele@163.com
  * 所有app页面
  */
@@ -31,7 +34,7 @@ public class AppsActivity extends BaseActivity {
     private static final int spanCount = 4;
     private GridLayoutManager gridLayoutManager;
     private RecyclerView appRecyclerView;
-//    private BorderView border;
+    //    private BorderView border;
     private Handler handler = new Handler();
     private TopBar topBar;
     private RelativeLayout topBarLayout;
@@ -74,11 +77,19 @@ public class AppsActivity extends BaseActivity {
         appRecyclerView.setAdapter(allAppsAdapter);
         appRecyclerView.scrollToPosition(0);
 
-        allAppsAdapter.setOnItemClickListener(new AllAppsAdapter.OnItemClickListener() {
+        allAppsAdapter.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onClick(String pkgName) {
                 ControlManager.getInstance().startInstalledApp(AppsActivity.this, pkgName);
+            }
+        });
+
+        allAppsAdapter.setOnItemFocusChangeListener(new ItemFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View view, boolean hasFocus, float scaleX, float scaleY) {
+                ControlManager.getInstance().startAnimator(view, hasFocus, scaleX, scaleY);
             }
         });
     }

@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.SQLException;
 import android.net.Uri;
+import android.support.v4.view.ViewCompat;
+import android.view.View;
 
 import com.fengsong.launcher.AppsActivity;
 import com.fengsong.launcher.MainApplication;
@@ -127,4 +129,20 @@ public class ControlManager {
         TvCommonManager.getInstance().setInputSource(sourceIndex);
     }
 
+    public void startAnimator(View view, boolean hasFocus, float scaleX,float scaleY) {
+        view.animate().cancel();
+        if (hasFocus) {
+            ViewCompat.animate(view)
+                    .scaleX(scaleX)
+                    .scaleY(scaleY)
+                    .setDuration(200)
+                    .start();
+        } else {
+            ViewCompat.animate(view)
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .setDuration(200)
+                    .start();
+        }
+    }
 }

@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * zhulf 20190924
+ * zhulf 20191031
  * andevele@163.com
  * 所有app页面,自定义间距
  */

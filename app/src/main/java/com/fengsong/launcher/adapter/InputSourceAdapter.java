@@ -1,7 +1,6 @@
 package com.fengsong.launcher.adapter;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,12 @@ import android.widget.TextView;
 
 
 import com.fengsong.launcher.R;
-import com.fengsong.launcher.util.Constant;
+import com.fengsong.launcher.base.ViewListener.ItemFocusChangeListener;
 
 import java.util.List;
 
 /**
- * zhulf 20190924
+ * zhulf 20191031
  * andevele@163.com
  * 主页通道列表适配器
  */
@@ -25,6 +24,7 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
     private final List<String> dataSource;
     private final int layoutId;
     private OnItemClickListener onItemClickListener;
+    private ItemFocusChangeListener focusChangeListener;
 
     public interface OnItemClickListener {
         void onItemClick(int layoutPos);
@@ -38,6 +38,10 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
+    }
+
+    public void setOnItemFocusChangeListener(ItemFocusChangeListener focusChangeListener) {
+        this.focusChangeListener = focusChangeListener;
     }
 
     @Override
@@ -95,21 +99,8 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
         viewHolder.itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if(hasFocus) {
-//                    view.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start();
-                    ViewCompat.animate(view)
-                            .scaleX(1.05f)
-                            .scaleY(1.1f)
-                            .setDuration(200)
-                            .start();
-
-                } else {
-//                    view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start();
-                    ViewCompat.animate(view)
-                            .scaleX(1.0f)
-                            .scaleY(1.0f)
-                            .setDuration(200)
-                            .start();
+                if(focusChangeListener != null) {
+                    focusChangeListener.onFocusChange(view,hasFocus,1.05f,1.1f);
                 }
             }
         });

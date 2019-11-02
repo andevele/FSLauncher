@@ -10,16 +10,16 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
-import android.util.Log;
 
 import com.fengsong.launcher.base.BaseActivity;
 import com.fengsong.launcher.util.Constant;
+import com.fengsong.launcher.util.LogUtils;
 import com.fengsong.launcher.util.USBUtil;
 
 import java.lang.ref.WeakReference;
 
 public class NetworkMonitor extends BroadcastReceiver {
-    private static final String TAG = "NetworkMonitor";
+    private static final String TAG = NetworkMonitor.class.getSimpleName();
     // Network Kind and value
     public static final String KEY_NET_INTERFACE_ID = "NetworkMonitor.interface";
     public static final int ID_INTERFACE_ETHERNET = 0;
@@ -88,7 +88,6 @@ public class NetworkMonitor extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String netWorkAction = intent.getAction();
-        Log.d("zhujj","==netWorkAction: " + netWorkAction);
         switch (netWorkAction) {
             case ConnectivityManager.CONNECTIVITY_ACTION:
                 mWifiEnabled = intent.getIntExtra(ConnectivityManager.EXTRA_NETWORK_TYPE, ConnectivityManager.TYPE_ETHERNET) == ConnectivityManager.TYPE_WIFI;
@@ -147,7 +146,7 @@ public class NetworkMonitor extends BroadcastReceiver {
             mCurrentConnectivity.putInt(KEY_NET_WIFI_LEVEL, mWifiLevel);
         }
 
-        Log.d("zhujj", "NetworkMonitor.interface:" + mActiveInterface + "NetworkMonitor.Status:" + mActiveStatus + "NetworkMonitor.wifi.level:" + mWifiLevel);
+        LogUtils.v(TAG, "NetworkMonitor.interface:" + mActiveInterface + "NetworkMonitor.Status:" + mActiveStatus + "NetworkMonitor.wifi.level:" + mWifiLevel);
 
         return mCurrentConnectivity;
     }

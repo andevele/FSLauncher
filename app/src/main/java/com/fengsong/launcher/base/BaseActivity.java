@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
 import com.fengsong.launcher.R;
 import com.fengsong.launcher.control.ControlManager;
 import com.fengsong.launcher.net.NetworkMonitor;

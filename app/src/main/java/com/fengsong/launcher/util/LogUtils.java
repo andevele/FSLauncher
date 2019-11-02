@@ -1,7 +1,7 @@
 package com.fengsong.launcher.util;
 
 /**
- * zhulf 20190924
+ * zhulf 20191031
  * andevele@163.com
  * 日志管理
  */

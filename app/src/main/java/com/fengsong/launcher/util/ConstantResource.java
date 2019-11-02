@@ -4,7 +4,7 @@ package com.fengsong.launcher.util;
 import com.fengsong.launcher.R;
 
 /**
- * zhulf 20190924
+ * zhulf 20191031
  * andevele@163.com
  * 网络相关常量
  */

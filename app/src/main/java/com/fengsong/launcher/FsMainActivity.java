@@ -9,12 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.fengsong.launcher.adapter.InputSourceAdapter;
 import com.fengsong.launcher.base.BaseActivity;
+import com.fengsong.launcher.base.ViewListener;
 import com.fengsong.launcher.control.ControlManager;
 import com.fengsong.launcher.data.DataAsyncTask;
 import com.fengsong.launcher.util.Constant;
@@ -39,9 +39,9 @@ public class FsMainActivity extends BaseActivity {
 
     private void initViews() {
         commonAppsContainer = (RelativeLayout) findViewById(R.id.common_apps);
-        ViewClickListener viewClickListener = new ViewClickListener();
         for (int i = 0; i < commonAppsContainer.getChildCount(); i++) {
-            commonAppsContainer.getChildAt(i).setOnClickListener(viewClickListener);
+            commonAppsContainer.getChildAt(i).setOnClickListener(new ViewClickListener());
+            commonAppsContainer.getChildAt(i).setOnFocusChangeListener(new ViewFocusChangeListener());
         }
         initInputSourceView();
     }
@@ -73,6 +73,14 @@ public class FsMainActivity extends BaseActivity {
                 default:
                     break;
             }
+        }
+    }
+
+    class ViewFocusChangeListener implements View.OnFocusChangeListener {
+
+        @Override
+        public void onFocusChange(View view, boolean hasFocus) {
+            ControlManager.getInstance().startAnimator(view,hasFocus,1.1f,1.1f);
         }
     }
 
@@ -165,6 +173,12 @@ public class FsMainActivity extends BaseActivity {
             @Override
             public void onItemClick(int layoutPos) {
                 ControlManager.getInstance().switchSource(layoutPos, dataList);
+            }
+        });
+        adapter.setOnItemFocusChangeListener(new ViewListener.ItemFocusChangeListener(){
+            @Override
+            public void onFocusChange(View view, boolean hasFocus, float scaleX, float scaleY) {
+                ControlManager.getInstance().startAnimator(view,hasFocus,scaleX,scaleY);
             }
         });
     }
