@@ -68,7 +68,7 @@ public class FsMainActivity extends BaseActivity {
                     launchApp("net.micode.fileexplorer");
                     break;
                 case R.id.view_apps:
-                    startActivity("com.cxel.launcher.action.AllAppsAdapter");
+                    startActivity("com.fengsong.launcher.action.allapps");
                     break;
                 default:
                     break;

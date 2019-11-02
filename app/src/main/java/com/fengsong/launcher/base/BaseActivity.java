@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.fengsong.launcher.R;
 import com.fengsong.launcher.control.ControlManager;
 import com.fengsong.launcher.net.NetworkMonitor;
+import com.fengsong.launcher.util.LogUtils;
 import com.fengsong.launcher.view.TopBar;
 import com.mstar.android.tv.TvCommonManager;
 
@@ -28,9 +33,22 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
+        LogUtils.d("zhulf","===this22: " + this.toString());
+        if(this.toString().contains("FsMainActivity")) {
+            updateView(R.string.page_home,R.drawable.ic_home);
+        } else if(this.toString().contains("AppsActivity")) {
+            updateView(R.string.page_apps,R.drawable.ic_apps);
+        }
         SystemProperties.set("persist.sys.intvmode", "0");
         goToStorageSource();
+        super.onResume();
+    }
+
+    private void updateView(int stringId,int imageId) {
+        TextView pageLabel = (TextView) findViewById(R.id.page_label);
+        ImageView pageIcon = (ImageView)findViewById(R.id.page_icon);
+        pageLabel.setText(getResources().getString(stringId));
+        pageIcon.setImageResource(imageId);
     }
 
     private void goToStorageSource() {

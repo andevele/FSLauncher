@@ -17,6 +17,7 @@ import com.fengsong.launcher.control.ControlManager;
 import com.fengsong.launcher.data.AppData;
 import com.fengsong.launcher.model.AppInfo;
 import com.fengsong.launcher.net.NetworkMonitor;
+import com.fengsong.launcher.util.LogUtils;
 import com.fengsong.launcher.view.CustomDecoration;
 import com.fengsong.launcher.view.TopBar;
 
@@ -96,12 +97,12 @@ public class AppsActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         List<AppInfo> appInfoList = AppData.getInstance().getAppInfo();
         if (appInfoList == null || appInfoList.size() < 1) {
             appInfoList = AppData.getInstance().catchAppInfo();
         }
         allAppsAdapter.updateData(appInfoList);
+        super.onResume();
     }
 
     @Override

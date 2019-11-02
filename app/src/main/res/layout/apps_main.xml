@@ -8,7 +8,7 @@
     android:focusable="false"
     android:orientation="vertical">
 
-    <com.cxel.launcher.view.TopBar
+    <com.fengsong.launcher.view.TopBar
         android:id="@+id/topbar_container"
         android:layout_width="match_parent"
         android:layout_height="80dp" />

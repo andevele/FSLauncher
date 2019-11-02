@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FSLauncher</string>
+    <string name="page_home">Home</string>
+    <string name="page_apps">Apps</string>
 </resources>

@@ -6,7 +6,7 @@
     android:clipChildren="false">
 
     <ImageView
-        android:id="@+id/home_icon"
+        android:id="@+id/page_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -14,11 +14,11 @@
         android:src="@drawable/ic_home" />
 
     <TextView
-        android:id="@+id/home_label"
+        android:id="@+id/page_label"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@+id/home_icon"
+        android:layout_toEndOf="@+id/page_icon"
         android:gravity="center"
         android:text="Home"
         android:textColor="@color/white"
