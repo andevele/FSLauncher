@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.fengsong.launcher.R;
 import com.fengsong.launcher.base.ViewListener.ItemFocusChangeListener;
+import com.fengsong.launcher.util.Constant;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
     public void onBindViewHolder(final CustomViewHolder viewHolder, int position) {
         viewHolder.mTextView.setText(dataSource.get(position));
         String sourceName = dataSource.get(position);
-        /*
+
         switch (sourceName) {
             case Constant.INPUT_SOURCE_NAME_ATV:
                 viewHolder.mSourceIcon.setImageResource(R.drawable.ic_atv);
@@ -84,7 +85,7 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
             default:
                 break;
 
-        }*/
+        }
         viewHolder.itemView.setTag(position);
         if (onItemClickListener == null) {
             return;
@@ -118,8 +119,8 @@ public class InputSourceAdapter extends RecyclerView.Adapter<InputSourceAdapter.
 
         public CustomViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.textView);
-//            mSourceIcon = (ImageView) itemView.findViewById(R.id.imageView);
+            mTextView = (TextView) itemView.findViewById(R.id.source_text);
+            mSourceIcon = (ImageView) itemView.findViewById(R.id.source_icon);
         }
     }
 }

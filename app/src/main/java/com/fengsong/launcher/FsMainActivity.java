@@ -124,7 +124,7 @@ public class FsMainActivity extends BaseActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.input_source_RecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, 1, false);
 //        GridLayoutManager layoutManager = new GridLayoutManager(this,1);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setFocusable(true);
         recyclerView.addItemDecoration(new RecycleViewItemDivider(this, LinearLayoutManager.VERTICAL, 7, getResources().getColor(R.color.input_source_item_divide_bg)));

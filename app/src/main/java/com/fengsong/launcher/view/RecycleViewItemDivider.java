@@ -20,7 +20,9 @@ public class RecycleViewItemDivider extends RecyclerView.ItemDecoration {
     private Paint mPaint;
     private Drawable mDivider;
     private int mTopMargin = 2;
+    private int mMargin = 5;
     private int mDividerHeight = 3;
+    private int mDividerWidth = 20;
     private int mOrientation;
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
@@ -59,17 +61,20 @@ public class RecycleViewItemDivider extends RecyclerView.ItemDecoration {
 //            outRect.top = 5;
 //        }
         int count = parent.getAdapter().getItemCount();
-//        if (visualPos == parent.getAdapter().getItemCount() - 1) {
-//            outRect.bottom = 0;
+        if (visualPos == 0) {
+            outRect.left = mMargin;
+            outRect.right = mDividerWidth;
+        } else if(visualPos == count - 1){
+            outRect.right = mMargin;
+        } else {
+            outRect.right = mDividerWidth;
+        }
+//        if(visualPos == 0) {
+//            outRect.top = mTopMargin;
+//            outRect.bottom = mDividerHeight;
 //        } else {
 //            outRect.bottom = mDividerHeight;
 //        }
-        if(visualPos == 0) {
-            outRect.top = mTopMargin;
-            outRect.bottom = mDividerHeight;
-        } else {
-            outRect.bottom = mDividerHeight;
-        }
     }
 
 
