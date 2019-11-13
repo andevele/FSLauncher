@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -16,6 +17,7 @@ import com.fengsong.launcher.adapter.InputSourceAdapter;
 import com.fengsong.launcher.base.BaseActivity;
 import com.fengsong.launcher.base.ViewListener;
 import com.fengsong.launcher.control.ControlManager;
+import com.fengsong.launcher.data.AppData;
 import com.fengsong.launcher.data.DataAsyncTask;
 import com.fengsong.launcher.util.Constant;
 import com.fengsong.launcher.view.RecycleViewItemDivider;
@@ -35,6 +37,7 @@ public class FsMainActivity extends BaseActivity {
         setContentView(R.layout.fs_activity_main);
         super.onCreate(savedInstanceState);
         initViews();
+
     }
 
     private void initViews() {
@@ -140,7 +143,7 @@ public class FsMainActivity extends BaseActivity {
     private void CreateSourceData(final RecyclerView recyclerView, final int layoutId) {
         List<String> data = new ArrayList<String>();
         List<String> list = new ArrayList<String>();
-        MainApplication application = (MainApplication) getApplication();
+        final MainApplication application = (MainApplication) getApplication();
         Map<String, List<String>> dataMap = application.getDataMap();
         List<String> dataList = dataMap.get(Constant.INPUT_SOURCE_SECTION);
         if (dataList == null || dataList.size() < 0) {
@@ -148,6 +151,7 @@ public class FsMainActivity extends BaseActivity {
             dataAsyncTask.setDataTask(new DataAsyncTask.DataTask() {
                 @Override
                 public void excuteSuccess(List<String> dataList) {
+                    application.setDataMap(dataList);
                     updateList(recyclerView, dataList, layoutId);
                 }
 
@@ -161,7 +165,6 @@ public class FsMainActivity extends BaseActivity {
         }
 
         updateList(recyclerView, dataList, layoutId);
-
     }
 
     private void updateList(RecyclerView recyclerView, final List<String> dataList, int layoutId) {

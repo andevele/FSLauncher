@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.fengsong.launcher.R;
 import com.fengsong.launcher.control.ControlManager;
+import com.fengsong.launcher.data.AppData;
 import com.fengsong.launcher.net.NetworkMonitor;
 import com.fengsong.launcher.util.LogUtils;
 import com.fengsong.launcher.view.TopBar;
@@ -33,7 +34,6 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        LogUtils.d("zhulf","===this22: " + this.toString());
         if(this.toString().contains("FsMainActivity")) {
             updateView(R.string.page_home,R.drawable.ic_home);
         } else if(this.toString().contains("AppsActivity")) {

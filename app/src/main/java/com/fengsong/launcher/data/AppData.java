@@ -4,16 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 
 import com.fengsong.launcher.MainApplication;
 import com.fengsong.launcher.adapter.AllAppsAdapter;
 import com.fengsong.launcher.model.AppInfo;
 import com.fengsong.launcher.thread.AppExecutors;
+import com.fengsong.launcher.util.Constant;
 import com.fengsong.launcher.util.ConstantResource;
+import com.fengsong.launcher.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
@@ -24,10 +29,12 @@ import java.util.concurrent.FutureTask;
  * 所有app获取的数据类
  */
 public class AppData {
+    private static final String TAG = AppData.class.getSimpleName();
     private static AppData INSTANCE = null;
     private final Context mContext;
     private final PackageManager packageManager;
     private AppExecutors appExecutors;
+    Map<String, List<String>> dataMap = new HashMap<String, List<String>>();
     private List<AppInfo> appInfoList = new ArrayList<AppInfo>();
     private int opt;
     private String[] packages;
@@ -46,6 +53,27 @@ public class AppData {
             INSTANCE = new AppData();
         }
         return INSTANCE;
+    }
+
+    public void initData() {
+        DataAsyncTask dataAsyncTask = new DataAsyncTask();
+        dataAsyncTask.setDataTask(new DataAsyncTask.DataTask() {
+            @Override
+            public void excuteSuccess(List<String> list) {
+                dataMap.put(Constant.INPUT_SOURCE_SECTION, list);
+            }
+
+            @Override
+            public void executeFailed() {
+                LogUtils.e(TAG,"have not received data");
+            }
+        });
+        dataAsyncTask.execute(Constant.INPUT_SOURCE_JSON_FILE, Constant.INPUT_SOURCE_SECTION);
+        catchAppInfo();
+    }
+
+    public Map<String, List<String>> getDataMap() {
+        return dataMap;
     }
 
     public List<AppInfo> catchAppInfo() {
