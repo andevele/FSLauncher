@@ -64,11 +64,14 @@ public class FsMainActivity extends BaseActivity {
                 case R.id.view_hotstar:
                     launchApp("in.startv.hotstar");
                     break;
-                case R.id.view_tvstore:
-                    launchApp("cm.aptoidetv.pt");
-                    break;
                 case R.id.view_file_explorer:
                     launchApp("net.micode.fileexplorer");
+                    break;
+                case R.id.view_wireless_display:
+                    launchApp("com.toptech.mitv.wfd");
+                    break;
+                case R.id.view_tvstore:
+                    launchApp("cm.aptoidetv.pt");
                     break;
                 case R.id.view_apps:
                     startActivity("com.fengsong.launcher.action.allapps");
