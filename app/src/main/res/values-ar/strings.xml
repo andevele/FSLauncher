@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CxeLauncher</string>
+    <string name="page_home">الصفحة الرئيسية</string>
+    <string name="page_apps">التطبيقات</string>
+</resources>
