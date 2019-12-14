@@ -56,7 +56,8 @@ public class FsMainActivity extends BaseActivity {
             int id = view.getId();
             switch (id) {
                 case R.id.view_youtube:
-                    launchApp("com.google.android.youtube.tv");
+//                    launchApp("com.google.android.youtube.tv");
+                    launchApp("com.liskovsoft.videomanager");
                     break;
                 case R.id.view_netflix:
                     launchApp("com.netflix.mediaclient");
